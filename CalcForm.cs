@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -104,17 +105,41 @@ namespace Big_calculator
             {
                 return;
             }
+
             decimal result;
-            switch (_currentOperation)
+            try
             {
-                case 0:
-                    result = _number1 + _number2;
-                    this.resultBox.Text = Convert.ToString(result);
-                    break;
-                case 1:
-                    result = _number1 - _number2;
-                    this.resultBox.Text = Convert.ToString(result);
-                    break;
+                switch (_currentOperation)
+                {
+                    case 0:
+                        result = _number1 + _number2;
+                        result = Math.Round(result, 6);
+                        this.resultBox.Text = result.ToString("#,0.######", _outputFormatInfo);
+                        break;
+                    case 1:
+                        result = _number1 - _number2;
+                        result = Math.Round(result, 6);
+                        this.resultBox.Text = result.ToString("#,0.######", _outputFormatInfo);
+                        break;
+                    case 2:
+                        result = _number1 * _number2;
+                        result = Math.Round(result, 6);
+                        this.resultBox.Text = result.ToString("#,0.######", _outputFormatInfo);
+                        break;
+                    case 3:
+                        result = _number1 / _number2;
+                        result = Math.Round(result, 6);
+                        this.resultBox.Text = result.ToString("#,0.######", _outputFormatInfo);
+                        break;
+                }
+            }
+            catch (DivideByZeroException)
+            {
+                MessageBox.Show("Calculation error!\nDivision by zero!");
+            }
+            catch (OverflowException)
+            {
+                MessageBox.Show("Result number is out of reachable range!\nImpossible to complete operation!");
             }
         }
 
@@ -129,5 +154,12 @@ namespace Big_calculator
             this.wrongFormatLabel2.Visible = false;
             this.outOfRangeLabel2.Visible = false;
         }
+
+        private readonly NumberFormatInfo _outputFormatInfo = new NumberFormatInfo
+        {
+            NumberGroupSeparator = " ",
+            NumberDecimalDigits = 6,
+            NumberDecimalSeparator = "."
+        };
     }
 }
