@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Globalization;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -27,68 +28,86 @@ namespace Big_calculator
             this.inputNumber1.Text = "0.0";
             this.inputNumber2.Text = "0.0";
         }
-        private int checkFormat(string input)
+        private static bool IsValidFormat(string input)
         {
-            string stringNumber = input;
-            stringNumber = stringNumber.Replace('.', ',');
+            string pattern = @"^\d{1,3}( \d{3})*(\,\d+)?$";
+            return Regex.IsMatch(input, pattern);
+        }
+        private decimal? TryParseNumber(Control control, string input)
+        {
+            string stringNumber = input.Replace('.', ',').TrimEnd();
+            decimal number = 0.0M;
             try
             {
-                Convert.ToDecimal(stringNumber, new System.Globalization.CultureInfo("ru-RU"));
-                return 1;
+                if (stringNumber.Contains(" "))
+                    throw new FormatException("");
+
+                number = decimal.Parse(stringNumber);
+                return number;
             }
             catch (FormatException ex)
             {
-                MessageBox.Show("Wrong input format!\nChange your numbers!");
-                return 0;
+                try
+                {
+                    if (!IsValidFormat(stringNumber))
+                        throw new FormatException(ex.Message);
+
+                    number = decimal.Parse(stringNumber, _inputFormatInfo);
+                    return number;
+                }
+                catch (FormatException)
+                {
+                    this.resultBox.Text = String.Empty;
+
+                    if (control == this.inputNumber1)
+                        this.wrongFormatLabel1.Visible = true; 
+                    
+                    else if (control == this.inputNumber2)
+                        this.wrongFormatLabel2.Visible = true;
+
+                    else
+                    {
+                        MessageBox.Show("Wrong input format!\nChange your numbers!");
+                    }
+                    return null;
+                }
             }
             catch (OverflowException ex)
             {
-                return 0;
+                this.resultBox.Text = String.Empty;
+
+                if (control == this.inputNumber1)
+                    this.outOfRangeLabel1.Visible = true;
+                
+                else if (control == this.inputNumber2)
+                    this.outOfRangeLabel2.Visible = true;
+
+                else
+                {
+                    MessageBox.Show("Number are out of range!\nChange your numbers!");
+                }
+                return null;
             }
         }
 
         private void inputNumber1_Leave(object sender, EventArgs e)
         {
-            string stringNumber = this.inputNumber1.Text;
-            stringNumber = stringNumber.Replace('.', ',');
-            try
+            decimal? number = TryParseNumber(this.inputNumber1, this.inputNumber1.Text);
+            if (number != null)
             {
-                _number1 = Convert.ToDecimal(stringNumber, new System.Globalization.CultureInfo("ru-RU"));
+                _number1 = number.Value;
             }
-            catch (FormatException ex)
-            {
-                this.resultBox.Text = String.Empty;
-                this.wrongFormatLabel1.Visible = true;
-                _number1 = 0.0M;
-            }
-            catch (OverflowException ex)
-            {
-                this.resultBox.Text = String.Empty;
-                this.outOfRangeLabel1.Visible = true;
-                _number2 = 0.0M;
-            }
+            else _number1 = 0.0M;
         }
 
         private void inputNumber2_Leave(object sender, EventArgs e)
         {
-            string stringNumber = this.inputNumber2.Text;
-            stringNumber = stringNumber.Replace('.', ',');
-            try
+            decimal? number = TryParseNumber(this.inputNumber2, this.inputNumber2.Text);
+            if (number != null)
             {
-                _number2 = Convert.ToDecimal(stringNumber, new System.Globalization.CultureInfo("ru-RU"));
+                _number2 = number.Value;
             }
-            catch (FormatException ex)
-            {
-                this.resultBox.Text = String.Empty;
-                this.wrongFormatLabel2.Visible = true;
-                _number2 = 0.0M;
-            }
-            catch (OverflowException ex)
-            {
-                this.resultBox.Text = String.Empty;
-                this.outOfRangeLabel2.Visible = true;
-                _number2 = 0.0M;
-            }
+            else _number2 = 0.0M;
         }
 
         private void operationBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -99,14 +118,12 @@ namespace Big_calculator
 
         private void equalsButton_Click(object sender, EventArgs e)
         {
-            this.resultBox.Text = String.Empty;
-            if (checkFormat(this.inputNumber1.Text) != 1 ||
-                checkFormat(this.inputNumber2.Text) != 1)
-            {
+            if (TryParseNumber(this.equalsButton, this.inputNumber1.Text) == null ||
+                TryParseNumber(this.equalsButton, this.inputNumber2.Text) == null)
                 return;
-            }
 
             decimal result;
+
             try
             {
                 switch (_currentOperation)
@@ -160,6 +177,12 @@ namespace Big_calculator
             NumberGroupSeparator = " ",
             NumberDecimalDigits = 6,
             NumberDecimalSeparator = "."
+        };
+
+        private readonly IFormatProvider _inputFormatInfo = new NumberFormatInfo
+        {
+            NumberGroupSeparator = " ",
+            NumberDecimalSeparator = ","
         };
     }
 }
