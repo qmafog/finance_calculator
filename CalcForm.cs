@@ -15,18 +15,36 @@ namespace Big_calculator
     public partial class CalcForm : Form
     {
 
-        private int _currentOperation;
+        private int _currentOperation1;
+        private int _currentOperation2;
+        private int _currentOperation3;
+
         private decimal _number1;
         private decimal _number2;
+        private decimal _number3;
+        private decimal _number4;
+
+        private int _roundingOption;
+
         public CalcForm()
         {
             InitializeComponent();
             this.operationBox.SelectedItem = this.operationBox.Items[0];
-            _currentOperation = this.operationBox.SelectedIndex;
+            _currentOperation1 = this.operationBox.SelectedIndex;
+            this.operationBox2.SelectedItem = this.operationBox2.Items[0];
+            _currentOperation2 = this.operationBox.SelectedIndex;
+            this.operationBox3.SelectedItem = this.operationBox3.Items[0];
+            _currentOperation3 = this.operationBox.SelectedIndex;
+            this.roundingOption.SelectedItem = this.roundingOption.Items[0];
+            _roundingOption = this.roundingOption.SelectedIndex;
             _number1 = 0.0M;
             _number2 = 0.0M;
+            _number3 = 0.0M;
+            _number4 = 0.0M;
             this.inputNumber1.Text = "0.0";
             this.inputNumber2.Text = "0.0";
+            this.inputNumber3.Text = "0.0";
+            this.inputNumber4.Text = "0.0";
         }
         private static bool IsValidFormat(string input)
         {
@@ -58,12 +76,19 @@ namespace Big_calculator
                 catch (FormatException)
                 {
                     this.resultBox.Text = String.Empty;
+                    this.roundedResultBox.Text = String.Empty;
 
                     if (control == this.inputNumber1)
                         this.wrongFormatLabel1.Visible = true; 
                     
                     else if (control == this.inputNumber2)
                         this.wrongFormatLabel2.Visible = true;
+
+                    else if (control == this.inputNumber3)
+                        this.wrongFormatLabel3.Visible = true;
+
+                    else if (control == this.inputNumber4)
+                        this.wrongFormatLabel4.Visible = true;
 
                     else
                     {
@@ -75,12 +100,19 @@ namespace Big_calculator
             catch (OverflowException ex)
             {
                 this.resultBox.Text = String.Empty;
+                this.roundedResultBox.Text = String.Empty;
 
                 if (control == this.inputNumber1)
                     this.outOfRangeLabel1.Visible = true;
                 
                 else if (control == this.inputNumber2)
                     this.outOfRangeLabel2.Visible = true;
+
+                else if (control == this.inputNumber3)
+                    this.outOfRangeLabel3.Visible = true;
+
+                else if (control == this.inputNumber4)
+                    this.outOfRangeLabel4.Visible = true;
 
                 else
                 {
@@ -110,45 +142,63 @@ namespace Big_calculator
             else _number2 = 0.0M;
         }
 
+        private void inputNumber3_Leave(object sender, EventArgs e)
+        {
+            decimal? number = TryParseNumber(this.inputNumber3, this.inputNumber3.Text);
+            if (number != null)
+            {
+                _number3 = number.Value;
+            }
+            else _number3 = 0.0M;
+        }
+
+        private void inputNumber4_Leave(object sender, EventArgs e)
+        {
+            decimal? number = TryParseNumber(this.inputNumber4, this.inputNumber4.Text);
+            if (number != null)
+            {
+                _number4 = number.Value;
+            }
+            else _number4 = 0.0M;
+        }
+
         private void operationBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             this.resultBox.Text = String.Empty;
-            _currentOperation = this.operationBox.SelectedIndex;
+            this.roundedResultBox.Text = String.Empty;
+            _currentOperation1 = this.operationBox.SelectedIndex;
         }
 
         private void equalsButton_Click(object sender, EventArgs e)
         {
             if (TryParseNumber(this.equalsButton, this.inputNumber1.Text) == null ||
+                TryParseNumber(this.equalsButton, this.inputNumber3.Text) == null ||
+                TryParseNumber(this.equalsButton, this.inputNumber4.Text) == null ||
                 TryParseNumber(this.equalsButton, this.inputNumber2.Text) == null)
                 return;
 
-            decimal result;
+            decimal result = 0.0M, 
+                    middleAction = 0.0M,  
+                    secondAction = 0.0M;
 
             try
             {
-                switch (_currentOperation)
+                middleAction = DoOperation(_currentOperation2, _number2, _number3);
+
+                if (!( _currentOperation1 == 2 || _currentOperation1 == 3 ) &&
+                     ( _currentOperation3 == 2 || _currentOperation3 == 3 ))
                 {
-                    case 0:
-                        result = _number1 + _number2;
-                        result = Math.Round(result, 6);
-                        this.resultBox.Text = result.ToString("#,0.######", _outputFormatInfo);
-                        break;
-                    case 1:
-                        result = _number1 - _number2;
-                        result = Math.Round(result, 6);
-                        this.resultBox.Text = result.ToString("#,0.######", _outputFormatInfo);
-                        break;
-                    case 2:
-                        result = _number1 * _number2;
-                        result = Math.Round(result, 6);
-                        this.resultBox.Text = result.ToString("#,0.######", _outputFormatInfo);
-                        break;
-                    case 3:
-                        result = _number1 / _number2;
-                        result = Math.Round(result, 6);
-                        this.resultBox.Text = result.ToString("#,0.######", _outputFormatInfo);
-                        break;
+                    secondAction = DoOperation(_currentOperation3, middleAction, _number4);
+                    result = DoOperation(_currentOperation1, _number1, secondAction);
                 }
+                else
+                {
+                    secondAction = DoOperation(_currentOperation1, _number1, middleAction);
+                    result = DoOperation(_currentOperation3, secondAction, _number4);
+                }
+
+                this.resultBox.Text = result.ToString("#,0.##########", _outputFormatInfo);
+                ShowRounded(result);
             }
             catch (DivideByZeroException)
             {
@@ -156,7 +206,7 @@ namespace Big_calculator
             }
             catch (OverflowException)
             {
-                MessageBox.Show("Result number is out of reachable range!\nImpossible to complete operation!");
+                MessageBox.Show("Middleware calculation result is out of reachable range!\nImpossible to complete operation!");
             }
         }
 
@@ -175,7 +225,7 @@ namespace Big_calculator
         private readonly NumberFormatInfo _outputFormatInfo = new NumberFormatInfo
         {
             NumberGroupSeparator = " ",
-            NumberDecimalDigits = 6,
+            NumberDecimalDigits = 10,
             NumberDecimalSeparator = "."
         };
 
@@ -184,5 +234,95 @@ namespace Big_calculator
             NumberGroupSeparator = " ",
             NumberDecimalSeparator = ","
         };
+
+        private void operationBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            this.resultBox.Text = String.Empty;
+            this.roundedResultBox.Text = String.Empty;
+            _currentOperation2 = this.operationBox2.SelectedIndex;
+        }
+
+        private void operationBox3_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            this.resultBox.Text = String.Empty;
+            this.roundedResultBox.Text = String.Empty;
+            _currentOperation3 = this.operationBox3.SelectedIndex;
+        }
+
+        private void inputNumber3_Enter(object sender, EventArgs e)
+        {
+            this.wrongFormatLabel3.Visible = false;
+            this.outOfRangeLabel3.Visible = false;
+        }
+
+        private void inputNumber4_Enter(object sender, EventArgs e)
+        {
+            this.wrongFormatLabel4.Visible = false;
+            this.outOfRangeLabel4.Visible = false;
+        }
+
+        static decimal DoOperation(int operation, decimal num1, decimal num2)
+        {
+            decimal result = 0.0M;
+
+            switch (operation)
+            {
+                case 0:
+                    result = num1 + num2;             
+                    break;
+                case 1:
+                    result = num1 - num2;
+                    break;
+                case 2:
+                    result = num1 * num2;
+                    break;
+                case 3:
+                    result = num1 / num2;
+                    break;
+            }
+
+            result = Math.Round(result, 10);
+            return result;
+        }
+
+        private void ShowRounded(decimal num)
+        {
+            decimal result;
+            switch( _roundingOption)
+            {
+                case 0:
+                    result = Math.Round(num, MidpointRounding.AwayFromZero);
+                    break;
+                case 1:
+                    result = Math.Round(num, 0, MidpointRounding.ToEven);
+                    break;
+                case 2:
+                    result = Math.Floor(num);
+                    break;
+                default:
+                    MessageBox.Show("Rounding error!\n0_0");
+                    return;
+            }
+
+            this.roundedResultBox.Text = result.ToString("#,0", _outputFormatInfo);
+        }
+
+        private void roundingOption_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string result = this.resultBox.Text;
+            _roundingOption = this.roundingOption.SelectedIndex;
+            if (this.resultBox.Text != String.Empty)
+            {
+                string stringNumber = result.Replace('.', ',').TrimEnd();
+                decimal number = decimal.Parse(stringNumber);
+                ShowRounded(number);
+            }
+        }
+
+        private void CalcForm_Load(object sender, EventArgs e)
+        {
+
+        }
+
     }
 }
