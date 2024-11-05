@@ -40,6 +40,14 @@
             this.label4 = new System.Windows.Forms.Label();
             this.outOfRangeLabel1 = new System.Windows.Forms.Label();
             this.outOfRangeLabel2 = new System.Windows.Forms.Label();
+            this.inputNumber3 = new System.Windows.Forms.TextBox();
+            this.operationBox2 = new System.Windows.Forms.ComboBox();
+            this.inputNumber4 = new System.Windows.Forms.TextBox();
+            this.operationBox3 = new System.Windows.Forms.ComboBox();
+            this.outOfRangeLabel4 = new System.Windows.Forms.Label();
+            this.outOfRangeLabel3 = new System.Windows.Forms.Label();
+            this.wrongFormatLabel3 = new System.Windows.Forms.Label();
+            this.wrongFormatLabel4 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -82,7 +90,7 @@
             // equalsButton
             // 
             this.equalsButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.equalsButton.Location = new System.Drawing.Point(138, 122);
+            this.equalsButton.Location = new System.Drawing.Point(138, 251);
             this.equalsButton.Margin = new System.Windows.Forms.Padding(2);
             this.equalsButton.Name = "equalsButton";
             this.equalsButton.Size = new System.Drawing.Size(56, 34);
@@ -113,7 +121,7 @@
             // 
             this.resultBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
             this.resultBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.resultBox.Location = new System.Drawing.Point(12, 161);
+            this.resultBox.Location = new System.Drawing.Point(12, 299);
             this.resultBox.Margin = new System.Windows.Forms.Padding(2);
             this.resultBox.Name = "resultBox";
             this.resultBox.ReadOnly = true;
@@ -151,7 +159,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label4.Location = new System.Drawing.Point(10, 226);
+            this.label4.Location = new System.Drawing.Point(9, 352);
             this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(327, 13);
@@ -176,7 +184,7 @@
             this.outOfRangeLabel2.AutoSize = true;
             this.outOfRangeLabel2.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.outOfRangeLabel2.ForeColor = System.Drawing.Color.Red;
-            this.outOfRangeLabel2.Location = new System.Drawing.Point(314, 93);
+            this.outOfRangeLabel2.Location = new System.Drawing.Point(314, 92);
             this.outOfRangeLabel2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.outOfRangeLabel2.Name = "outOfRangeLabel2";
             this.outOfRangeLabel2.Size = new System.Drawing.Size(132, 26);
@@ -185,12 +193,130 @@
             this.outOfRangeLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.outOfRangeLabel2.Visible = false;
             // 
+            // inputNumber3
+            // 
+            this.inputNumber3.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.inputNumber3.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.inputNumber3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.inputNumber3.Location = new System.Drawing.Point(12, 159);
+            this.inputNumber3.Margin = new System.Windows.Forms.Padding(2);
+            this.inputNumber3.Name = "inputNumber3";
+            this.inputNumber3.Size = new System.Drawing.Size(298, 19);
+            this.inputNumber3.TabIndex = 14;
+            // 
+            // operationBox2
+            // 
+            this.operationBox2.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.operationBox2.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.operationBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.operationBox2.FormattingEnabled = true;
+            this.operationBox2.Items.AddRange(new object[] {
+            "+",
+            "-",
+            "*",
+            "/"});
+            this.operationBox2.Location = new System.Drawing.Point(138, 124);
+            this.operationBox2.Margin = new System.Windows.Forms.Padding(2);
+            this.operationBox2.Name = "operationBox2";
+            this.operationBox2.Size = new System.Drawing.Size(57, 28);
+            this.operationBox2.TabIndex = 13;
+            // 
+            // inputNumber4
+            // 
+            this.inputNumber4.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.inputNumber4.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.inputNumber4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.inputNumber4.Location = new System.Drawing.Point(12, 219);
+            this.inputNumber4.Margin = new System.Windows.Forms.Padding(2);
+            this.inputNumber4.Name = "inputNumber4";
+            this.inputNumber4.Size = new System.Drawing.Size(298, 19);
+            this.inputNumber4.TabIndex = 16;
+            // 
+            // operationBox3
+            // 
+            this.operationBox3.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.operationBox3.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.operationBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.operationBox3.FormattingEnabled = true;
+            this.operationBox3.Items.AddRange(new object[] {
+            "+",
+            "-",
+            "*",
+            "/"});
+            this.operationBox3.Location = new System.Drawing.Point(138, 184);
+            this.operationBox3.Margin = new System.Windows.Forms.Padding(2);
+            this.operationBox3.Name = "operationBox3";
+            this.operationBox3.Size = new System.Drawing.Size(57, 28);
+            this.operationBox3.TabIndex = 15;
+            // 
+            // outOfRangeLabel4
+            // 
+            this.outOfRangeLabel4.AutoSize = true;
+            this.outOfRangeLabel4.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.outOfRangeLabel4.ForeColor = System.Drawing.Color.Red;
+            this.outOfRangeLabel4.Location = new System.Drawing.Point(314, 212);
+            this.outOfRangeLabel4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.outOfRangeLabel4.Name = "outOfRangeLabel4";
+            this.outOfRangeLabel4.Size = new System.Drawing.Size(132, 26);
+            this.outOfRangeLabel4.TabIndex = 17;
+            this.outOfRangeLabel4.Text = "Wrong number format!\r\nOut of range.";
+            this.outOfRangeLabel4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.outOfRangeLabel4.Visible = false;
+            // 
+            // outOfRangeLabel3
+            // 
+            this.outOfRangeLabel3.AutoSize = true;
+            this.outOfRangeLabel3.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.outOfRangeLabel3.ForeColor = System.Drawing.Color.Red;
+            this.outOfRangeLabel3.Location = new System.Drawing.Point(314, 152);
+            this.outOfRangeLabel3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.outOfRangeLabel3.Name = "outOfRangeLabel3";
+            this.outOfRangeLabel3.Size = new System.Drawing.Size(132, 26);
+            this.outOfRangeLabel3.TabIndex = 18;
+            this.outOfRangeLabel3.Text = "Wrong number format!\r\nOut of range.";
+            this.outOfRangeLabel3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.outOfRangeLabel3.Visible = false;
+            // 
+            // wrongFormatLabel3
+            // 
+            this.wrongFormatLabel3.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.wrongFormatLabel3.ForeColor = System.Drawing.Color.Red;
+            this.wrongFormatLabel3.Location = new System.Drawing.Point(314, 131);
+            this.wrongFormatLabel3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.wrongFormatLabel3.Name = "wrongFormatLabel3";
+            this.wrongFormatLabel3.Size = new System.Drawing.Size(134, 81);
+            this.wrongFormatLabel3.TabIndex = 19;
+            this.wrongFormatLabel3.Text = "Wrong number format!\r\nEnter float number.\r\n";
+            this.wrongFormatLabel3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.wrongFormatLabel3.Visible = false;
+            // 
+            // wrongFormatLabel4
+            // 
+            this.wrongFormatLabel4.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.wrongFormatLabel4.ForeColor = System.Drawing.Color.Red;
+            this.wrongFormatLabel4.Location = new System.Drawing.Point(314, 190);
+            this.wrongFormatLabel4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.wrongFormatLabel4.Name = "wrongFormatLabel4";
+            this.wrongFormatLabel4.Size = new System.Drawing.Size(134, 81);
+            this.wrongFormatLabel4.TabIndex = 20;
+            this.wrongFormatLabel4.Text = "Wrong number format!\r\nEnter float number.\r\n";
+            this.wrongFormatLabel4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.wrongFormatLabel4.Visible = false;
+            // 
             // CalcForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.ClientSize = new System.Drawing.Size(449, 246);
+            this.ClientSize = new System.Drawing.Size(449, 374);
+            this.Controls.Add(this.wrongFormatLabel4);
+            this.Controls.Add(this.wrongFormatLabel3);
+            this.Controls.Add(this.outOfRangeLabel3);
+            this.Controls.Add(this.outOfRangeLabel4);
+            this.Controls.Add(this.inputNumber4);
+            this.Controls.Add(this.operationBox3);
+            this.Controls.Add(this.inputNumber3);
+            this.Controls.Add(this.operationBox2);
             this.Controls.Add(this.outOfRangeLabel2);
             this.Controls.Add(this.outOfRangeLabel1);
             this.Controls.Add(this.label4);
@@ -226,6 +352,14 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label outOfRangeLabel1;
         private System.Windows.Forms.Label outOfRangeLabel2;
+        private System.Windows.Forms.TextBox inputNumber3;
+        private System.Windows.Forms.ComboBox operationBox2;
+        private System.Windows.Forms.TextBox inputNumber4;
+        private System.Windows.Forms.ComboBox operationBox3;
+        private System.Windows.Forms.Label outOfRangeLabel4;
+        private System.Windows.Forms.Label outOfRangeLabel3;
+        private System.Windows.Forms.Label wrongFormatLabel3;
+        private System.Windows.Forms.Label wrongFormatLabel4;
     }
 }
 
