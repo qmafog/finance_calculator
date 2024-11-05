@@ -18,10 +18,14 @@ namespace Big_calculator
         private int _currentOperation1;
         private int _currentOperation2;
         private int _currentOperation3;
+
         private decimal _number1;
         private decimal _number2;
         private decimal _number3;
         private decimal _number4;
+
+        private int _roundingOption;
+
         public CalcForm()
         {
             InitializeComponent();
@@ -31,6 +35,8 @@ namespace Big_calculator
             _currentOperation2 = this.operationBox.SelectedIndex;
             this.operationBox3.SelectedItem = this.operationBox3.Items[0];
             _currentOperation3 = this.operationBox.SelectedIndex;
+            this.roundingOption.SelectedItem = this.roundingOption.Items[0];
+            _roundingOption = this.roundingOption.SelectedIndex;
             _number1 = 0.0M;
             _number2 = 0.0M;
             _number3 = 0.0M;
@@ -70,6 +76,7 @@ namespace Big_calculator
                 catch (FormatException)
                 {
                     this.resultBox.Text = String.Empty;
+                    this.roundedResultBox.Text = String.Empty;
 
                     if (control == this.inputNumber1)
                         this.wrongFormatLabel1.Visible = true; 
@@ -93,6 +100,7 @@ namespace Big_calculator
             catch (OverflowException ex)
             {
                 this.resultBox.Text = String.Empty;
+                this.roundedResultBox.Text = String.Empty;
 
                 if (control == this.inputNumber1)
                     this.outOfRangeLabel1.Visible = true;
@@ -157,6 +165,7 @@ namespace Big_calculator
         private void operationBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             this.resultBox.Text = String.Empty;
+            this.roundedResultBox.Text = String.Empty;
             _currentOperation1 = this.operationBox.SelectedIndex;
         }
 
@@ -174,21 +183,22 @@ namespace Big_calculator
 
             try
             {
-                middleAction = doOperation(_currentOperation2, _number2, _number3);
+                middleAction = DoOperation(_currentOperation2, _number2, _number3);
 
                 if (!( _currentOperation1 == 2 || _currentOperation1 == 3 ) &&
                      ( _currentOperation3 == 2 || _currentOperation3 == 3 ))
                 {
-                    secondAction = doOperation(_currentOperation3, middleAction, _number4);
-                    result = doOperation(_currentOperation1, _number1, secondAction);
+                    secondAction = DoOperation(_currentOperation3, middleAction, _number4);
+                    result = DoOperation(_currentOperation1, _number1, secondAction);
                 }
                 else
                 {
-                    secondAction = doOperation(_currentOperation1, _number1, middleAction);
-                    result = doOperation(_currentOperation3, secondAction, _number4);
+                    secondAction = DoOperation(_currentOperation1, _number1, middleAction);
+                    result = DoOperation(_currentOperation3, secondAction, _number4);
                 }
 
                 this.resultBox.Text = result.ToString("#,0.##########", _outputFormatInfo);
+                ShowRounded(result);
             }
             catch (DivideByZeroException)
             {
@@ -228,12 +238,14 @@ namespace Big_calculator
         private void operationBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
             this.resultBox.Text = String.Empty;
+            this.roundedResultBox.Text = String.Empty;
             _currentOperation2 = this.operationBox2.SelectedIndex;
         }
 
         private void operationBox3_SelectedIndexChanged(object sender, EventArgs e)
         {
             this.resultBox.Text = String.Empty;
+            this.roundedResultBox.Text = String.Empty;
             _currentOperation3 = this.operationBox3.SelectedIndex;
         }
 
@@ -249,7 +261,7 @@ namespace Big_calculator
             this.outOfRangeLabel4.Visible = false;
         }
 
-        static decimal doOperation(int operation, decimal num1, decimal num2)
+        static decimal DoOperation(int operation, decimal num1, decimal num2)
         {
             decimal result = 0.0M;
 
@@ -271,6 +283,45 @@ namespace Big_calculator
 
             result = Math.Round(result, 10);
             return result;
+        }
+
+        private void ShowRounded(decimal num)
+        {
+            decimal result;
+            switch( _roundingOption)
+            {
+                case 0:
+                    result = Math.Round(num, MidpointRounding.AwayFromZero);
+                    break;
+                case 1:
+                    result = Math.Round(num, 0, MidpointRounding.ToEven);
+                    break;
+                case 2:
+                    result = Math.Floor(num);
+                    break;
+                default:
+                    MessageBox.Show("Rounding error!\n0_0");
+                    return;
+            }
+
+            this.roundedResultBox.Text = result.ToString("#,0", _outputFormatInfo);
+        }
+
+        private void roundingOption_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string result = this.resultBox.Text;
+            _roundingOption = this.roundingOption.SelectedIndex;
+            if (this.resultBox.Text != String.Empty)
+            {
+                string stringNumber = result.Replace('.', ',').TrimEnd();
+                decimal number = decimal.Parse(stringNumber);
+                ShowRounded(number);
+            }
+        }
+
+        private void CalcForm_Load(object sender, EventArgs e)
+        {
+
         }
 
     }

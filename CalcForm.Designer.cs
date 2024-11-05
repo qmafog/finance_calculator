@@ -48,6 +48,9 @@
             this.outOfRangeLabel3 = new System.Windows.Forms.Label();
             this.wrongFormatLabel3 = new System.Windows.Forms.Label();
             this.wrongFormatLabel4 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.roundingOption = new System.Windows.Forms.ComboBox();
+            this.roundedResultBox = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // label1
@@ -69,7 +72,7 @@
             this.inputNumber1.Location = new System.Drawing.Point(12, 37);
             this.inputNumber1.Margin = new System.Windows.Forms.Padding(2);
             this.inputNumber1.Name = "inputNumber1";
-            this.inputNumber1.Size = new System.Drawing.Size(298, 19);
+            this.inputNumber1.Size = new System.Drawing.Size(440, 19);
             this.inputNumber1.TabIndex = 1;
             this.inputNumber1.Enter += new System.EventHandler(this.inputNumber1_Enter);
             this.inputNumber1.Leave += new System.EventHandler(this.inputNumber1_Leave);
@@ -82,7 +85,7 @@
             this.inputNumber2.Location = new System.Drawing.Point(12, 97);
             this.inputNumber2.Margin = new System.Windows.Forms.Padding(2);
             this.inputNumber2.Name = "inputNumber2";
-            this.inputNumber2.Size = new System.Drawing.Size(298, 19);
+            this.inputNumber2.Size = new System.Drawing.Size(440, 19);
             this.inputNumber2.TabIndex = 3;
             this.inputNumber2.Enter += new System.EventHandler(this.inputNumber2_Enter);
             this.inputNumber2.Leave += new System.EventHandler(this.inputNumber2_Leave);
@@ -90,7 +93,7 @@
             // equalsButton
             // 
             this.equalsButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.equalsButton.Location = new System.Drawing.Point(138, 251);
+            this.equalsButton.Location = new System.Drawing.Point(215, 251);
             this.equalsButton.Margin = new System.Windows.Forms.Padding(2);
             this.equalsButton.Name = "equalsButton";
             this.equalsButton.Size = new System.Drawing.Size(56, 34);
@@ -110,7 +113,7 @@
             "-",
             "*",
             "/"});
-            this.operationBox.Location = new System.Drawing.Point(138, 62);
+            this.operationBox.Location = new System.Drawing.Point(215, 62);
             this.operationBox.Margin = new System.Windows.Forms.Padding(2);
             this.operationBox.Name = "operationBox";
             this.operationBox.Size = new System.Drawing.Size(57, 28);
@@ -125,14 +128,14 @@
             this.resultBox.Margin = new System.Windows.Forms.Padding(2);
             this.resultBox.Name = "resultBox";
             this.resultBox.ReadOnly = true;
-            this.resultBox.Size = new System.Drawing.Size(299, 26);
+            this.resultBox.Size = new System.Drawing.Size(440, 26);
             this.resultBox.TabIndex = 5;
             // 
             // wrongFormatLabel1
             // 
             this.wrongFormatLabel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.wrongFormatLabel1.ForeColor = System.Drawing.Color.Red;
-            this.wrongFormatLabel1.Location = new System.Drawing.Point(314, 11);
+            this.wrongFormatLabel1.Location = new System.Drawing.Point(456, 9);
             this.wrongFormatLabel1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.wrongFormatLabel1.Name = "wrongFormatLabel1";
             this.wrongFormatLabel1.Size = new System.Drawing.Size(134, 81);
@@ -146,7 +149,7 @@
             this.wrongFormatLabel2.AutoSize = true;
             this.wrongFormatLabel2.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.wrongFormatLabel2.ForeColor = System.Drawing.Color.Red;
-            this.wrongFormatLabel2.Location = new System.Drawing.Point(314, 93);
+            this.wrongFormatLabel2.Location = new System.Drawing.Point(456, 91);
             this.wrongFormatLabel2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.wrongFormatLabel2.Name = "wrongFormatLabel2";
             this.wrongFormatLabel2.Size = new System.Drawing.Size(132, 26);
@@ -159,7 +162,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label4.Location = new System.Drawing.Point(9, 352);
+            this.label4.Location = new System.Drawing.Point(11, 404);
             this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(327, 13);
@@ -170,7 +173,7 @@
             // 
             this.outOfRangeLabel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.outOfRangeLabel1.ForeColor = System.Drawing.Color.Red;
-            this.outOfRangeLabel1.Location = new System.Drawing.Point(314, 11);
+            this.outOfRangeLabel1.Location = new System.Drawing.Point(456, 9);
             this.outOfRangeLabel1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.outOfRangeLabel1.Name = "outOfRangeLabel1";
             this.outOfRangeLabel1.Size = new System.Drawing.Size(134, 81);
@@ -184,7 +187,7 @@
             this.outOfRangeLabel2.AutoSize = true;
             this.outOfRangeLabel2.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.outOfRangeLabel2.ForeColor = System.Drawing.Color.Red;
-            this.outOfRangeLabel2.Location = new System.Drawing.Point(314, 92);
+            this.outOfRangeLabel2.Location = new System.Drawing.Point(456, 90);
             this.outOfRangeLabel2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.outOfRangeLabel2.Name = "outOfRangeLabel2";
             this.outOfRangeLabel2.Size = new System.Drawing.Size(132, 26);
@@ -201,7 +204,7 @@
             this.inputNumber3.Location = new System.Drawing.Point(12, 159);
             this.inputNumber3.Margin = new System.Windows.Forms.Padding(2);
             this.inputNumber3.Name = "inputNumber3";
-            this.inputNumber3.Size = new System.Drawing.Size(298, 19);
+            this.inputNumber3.Size = new System.Drawing.Size(440, 19);
             this.inputNumber3.TabIndex = 14;
             this.inputNumber3.Enter += new System.EventHandler(this.inputNumber3_Enter);
             this.inputNumber3.Leave += new System.EventHandler(this.inputNumber3_Leave);
@@ -217,7 +220,7 @@
             "-",
             "*",
             "/"});
-            this.operationBox2.Location = new System.Drawing.Point(138, 124);
+            this.operationBox2.Location = new System.Drawing.Point(215, 124);
             this.operationBox2.Margin = new System.Windows.Forms.Padding(2);
             this.operationBox2.Name = "operationBox2";
             this.operationBox2.Size = new System.Drawing.Size(57, 28);
@@ -232,7 +235,7 @@
             this.inputNumber4.Location = new System.Drawing.Point(12, 219);
             this.inputNumber4.Margin = new System.Windows.Forms.Padding(2);
             this.inputNumber4.Name = "inputNumber4";
-            this.inputNumber4.Size = new System.Drawing.Size(298, 19);
+            this.inputNumber4.Size = new System.Drawing.Size(440, 19);
             this.inputNumber4.TabIndex = 16;
             this.inputNumber4.Enter += new System.EventHandler(this.inputNumber4_Enter);
             this.inputNumber4.Leave += new System.EventHandler(this.inputNumber4_Leave);
@@ -248,7 +251,7 @@
             "-",
             "*",
             "/"});
-            this.operationBox3.Location = new System.Drawing.Point(138, 184);
+            this.operationBox3.Location = new System.Drawing.Point(215, 184);
             this.operationBox3.Margin = new System.Windows.Forms.Padding(2);
             this.operationBox3.Name = "operationBox3";
             this.operationBox3.Size = new System.Drawing.Size(57, 28);
@@ -260,7 +263,7 @@
             this.outOfRangeLabel4.AutoSize = true;
             this.outOfRangeLabel4.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.outOfRangeLabel4.ForeColor = System.Drawing.Color.Red;
-            this.outOfRangeLabel4.Location = new System.Drawing.Point(314, 212);
+            this.outOfRangeLabel4.Location = new System.Drawing.Point(456, 212);
             this.outOfRangeLabel4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.outOfRangeLabel4.Name = "outOfRangeLabel4";
             this.outOfRangeLabel4.Size = new System.Drawing.Size(132, 26);
@@ -274,7 +277,7 @@
             this.outOfRangeLabel3.AutoSize = true;
             this.outOfRangeLabel3.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.outOfRangeLabel3.ForeColor = System.Drawing.Color.Red;
-            this.outOfRangeLabel3.Location = new System.Drawing.Point(314, 152);
+            this.outOfRangeLabel3.Location = new System.Drawing.Point(456, 150);
             this.outOfRangeLabel3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.outOfRangeLabel3.Name = "outOfRangeLabel3";
             this.outOfRangeLabel3.Size = new System.Drawing.Size(132, 26);
@@ -287,7 +290,7 @@
             // 
             this.wrongFormatLabel3.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.wrongFormatLabel3.ForeColor = System.Drawing.Color.Red;
-            this.wrongFormatLabel3.Location = new System.Drawing.Point(314, 131);
+            this.wrongFormatLabel3.Location = new System.Drawing.Point(456, 129);
             this.wrongFormatLabel3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.wrongFormatLabel3.Name = "wrongFormatLabel3";
             this.wrongFormatLabel3.Size = new System.Drawing.Size(134, 81);
@@ -300,7 +303,7 @@
             // 
             this.wrongFormatLabel4.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.wrongFormatLabel4.ForeColor = System.Drawing.Color.Red;
-            this.wrongFormatLabel4.Location = new System.Drawing.Point(314, 190);
+            this.wrongFormatLabel4.Location = new System.Drawing.Point(456, 190);
             this.wrongFormatLabel4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.wrongFormatLabel4.Name = "wrongFormatLabel4";
             this.wrongFormatLabel4.Size = new System.Drawing.Size(134, 81);
@@ -309,12 +312,54 @@
             this.wrongFormatLabel4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.wrongFormatLabel4.Visible = false;
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label2.Location = new System.Drawing.Point(9, 335);
+            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(183, 16);
+            this.label2.TabIndex = 21;
+            this.label2.Text = "Choose rounding method:";
+            // 
+            // roundingOption
+            // 
+            this.roundingOption.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.roundingOption.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.roundingOption.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.roundingOption.FormattingEnabled = true;
+            this.roundingOption.Items.AddRange(new object[] {
+            "mathematical",
+            "banker\'s",
+            "floor"});
+            this.roundingOption.Location = new System.Drawing.Point(198, 329);
+            this.roundingOption.Margin = new System.Windows.Forms.Padding(2);
+            this.roundingOption.Name = "roundingOption";
+            this.roundingOption.Size = new System.Drawing.Size(254, 28);
+            this.roundingOption.TabIndex = 22;
+            this.roundingOption.SelectedIndexChanged += new System.EventHandler(this.roundingOption_SelectedIndexChanged);
+            // 
+            // roundedResultBox
+            // 
+            this.roundedResultBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
+            this.roundedResultBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.roundedResultBox.Location = new System.Drawing.Point(12, 361);
+            this.roundedResultBox.Margin = new System.Windows.Forms.Padding(2);
+            this.roundedResultBox.Name = "roundedResultBox";
+            this.roundedResultBox.ReadOnly = true;
+            this.roundedResultBox.Size = new System.Drawing.Size(440, 26);
+            this.roundedResultBox.TabIndex = 23;
+            // 
             // CalcForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.ClientSize = new System.Drawing.Size(449, 374);
+            this.ClientSize = new System.Drawing.Size(601, 427);
+            this.Controls.Add(this.roundedResultBox);
+            this.Controls.Add(this.roundingOption);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.wrongFormatLabel4);
             this.Controls.Add(this.wrongFormatLabel3);
             this.Controls.Add(this.outOfRangeLabel3);
@@ -340,6 +385,7 @@
             this.MaximizeBox = false;
             this.Name = "CalcForm";
             this.Text = "Financial calculator";
+            this.Load += new System.EventHandler(this.CalcForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -366,6 +412,9 @@
         private System.Windows.Forms.Label outOfRangeLabel3;
         private System.Windows.Forms.Label wrongFormatLabel3;
         private System.Windows.Forms.Label wrongFormatLabel4;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ComboBox roundingOption;
+        private System.Windows.Forms.TextBox roundedResultBox;
     }
 }
 
