@@ -15,18 +15,30 @@ namespace Big_calculator
     public partial class CalcForm : Form
     {
 
-        private int _currentOperation;
+        private int _currentOperation1;
+        private int _currentOperation2;
+        private int _currentOperation3;
         private decimal _number1;
         private decimal _number2;
+        private decimal _number3;
+        private decimal _number4;
         public CalcForm()
         {
             InitializeComponent();
             this.operationBox.SelectedItem = this.operationBox.Items[0];
-            _currentOperation = this.operationBox.SelectedIndex;
+            _currentOperation1 = this.operationBox.SelectedIndex;
+            this.operationBox2.SelectedItem = this.operationBox2.Items[0];
+            _currentOperation2 = this.operationBox.SelectedIndex;
+            this.operationBox3.SelectedItem = this.operationBox3.Items[0];
+            _currentOperation3 = this.operationBox.SelectedIndex;
             _number1 = 0.0M;
             _number2 = 0.0M;
+            _number3 = 0.0M;
+            _number4 = 0.0M;
             this.inputNumber1.Text = "0.0";
             this.inputNumber2.Text = "0.0";
+            this.inputNumber3.Text = "0.0";
+            this.inputNumber4.Text = "0.0";
         }
         private static bool IsValidFormat(string input)
         {
@@ -113,7 +125,7 @@ namespace Big_calculator
         private void operationBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             this.resultBox.Text = String.Empty;
-            _currentOperation = this.operationBox.SelectedIndex;
+            _currentOperation1 = this.operationBox.SelectedIndex;
         }
 
         private void equalsButton_Click(object sender, EventArgs e)
@@ -126,7 +138,7 @@ namespace Big_calculator
 
             try
             {
-                switch (_currentOperation)
+                switch (_currentOperation1)
                 {
                     case 0:
                         result = _number1 + _number2;
@@ -184,5 +196,39 @@ namespace Big_calculator
             NumberGroupSeparator = " ",
             NumberDecimalSeparator = ","
         };
+
+        private void operationBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            this.resultBox.Text = String.Empty;
+            _currentOperation2 = this.operationBox.SelectedIndex;
+        }
+
+        private void operationBox3_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            this.resultBox.Text = String.Empty;
+            _currentOperation3 = this.operationBox.SelectedIndex;
+        }
+
+        private void inputNumber3_Enter(object sender, EventArgs e)
+        {
+            this.wrongFormatLabel3.Visible = false;
+            this.outOfRangeLabel3.Visible = false;
+        }
+
+        private void inputNumber3_Leave(object sender, EventArgs e)
+        {
+
+        }
+
+        private void inputNumber4_Enter(object sender, EventArgs e)
+        {
+            this.wrongFormatLabel4.Visible = false;
+            this.outOfRangeLabel4.Visible = false;
+        }
+
+        private void inputNumber4_Leave(object sender, EventArgs e)
+        {
+
+        }
     }
 }

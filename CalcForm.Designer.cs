@@ -203,6 +203,8 @@
             this.inputNumber3.Name = "inputNumber3";
             this.inputNumber3.Size = new System.Drawing.Size(298, 19);
             this.inputNumber3.TabIndex = 14;
+            this.inputNumber3.Enter += new System.EventHandler(this.inputNumber3_Enter);
+            this.inputNumber3.Leave += new System.EventHandler(this.inputNumber3_Leave);
             // 
             // operationBox2
             // 
@@ -220,6 +222,7 @@
             this.operationBox2.Name = "operationBox2";
             this.operationBox2.Size = new System.Drawing.Size(57, 28);
             this.operationBox2.TabIndex = 13;
+            this.operationBox2.SelectedIndexChanged += new System.EventHandler(this.operationBox2_SelectedIndexChanged);
             // 
             // inputNumber4
             // 
@@ -231,6 +234,8 @@
             this.inputNumber4.Name = "inputNumber4";
             this.inputNumber4.Size = new System.Drawing.Size(298, 19);
             this.inputNumber4.TabIndex = 16;
+            this.inputNumber4.Enter += new System.EventHandler(this.inputNumber4_Enter);
+            this.inputNumber4.Leave += new System.EventHandler(this.inputNumber4_Leave);
             // 
             // operationBox3
             // 
@@ -248,6 +253,7 @@
             this.operationBox3.Name = "operationBox3";
             this.operationBox3.Size = new System.Drawing.Size(57, 28);
             this.operationBox3.TabIndex = 15;
+            this.operationBox3.SelectedIndexChanged += new System.EventHandler(this.operationBox3_SelectedIndexChanged);
             // 
             // outOfRangeLabel4
             // 
