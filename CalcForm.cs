@@ -77,6 +77,12 @@ namespace Big_calculator
                     else if (control == this.inputNumber2)
                         this.wrongFormatLabel2.Visible = true;
 
+                    else if (control == this.inputNumber3)
+                        this.wrongFormatLabel3.Visible = true;
+
+                    else if (control == this.inputNumber4)
+                        this.wrongFormatLabel4.Visible = true;
+
                     else
                     {
                         MessageBox.Show("Wrong input format!\nChange your numbers!");
@@ -93,6 +99,12 @@ namespace Big_calculator
                 
                 else if (control == this.inputNumber2)
                     this.outOfRangeLabel2.Visible = true;
+
+                else if (control == this.inputNumber3)
+                    this.outOfRangeLabel3.Visible = true;
+
+                else if (control == this.inputNumber4)
+                    this.outOfRangeLabel4.Visible = true;
 
                 else
                 {
@@ -122,6 +134,26 @@ namespace Big_calculator
             else _number2 = 0.0M;
         }
 
+        private void inputNumber3_Leave(object sender, EventArgs e)
+        {
+            decimal? number = TryParseNumber(this.inputNumber3, this.inputNumber3.Text);
+            if (number != null)
+            {
+                _number3 = number.Value;
+            }
+            else _number3 = 0.0M;
+        }
+
+        private void inputNumber4_Leave(object sender, EventArgs e)
+        {
+            decimal? number = TryParseNumber(this.inputNumber4, this.inputNumber4.Text);
+            if (number != null)
+            {
+                _number4 = number.Value;
+            }
+            else _number4 = 0.0M;
+        }
+
         private void operationBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             this.resultBox.Text = String.Empty;
@@ -131,36 +163,32 @@ namespace Big_calculator
         private void equalsButton_Click(object sender, EventArgs e)
         {
             if (TryParseNumber(this.equalsButton, this.inputNumber1.Text) == null ||
+                TryParseNumber(this.equalsButton, this.inputNumber3.Text) == null ||
+                TryParseNumber(this.equalsButton, this.inputNumber4.Text) == null ||
                 TryParseNumber(this.equalsButton, this.inputNumber2.Text) == null)
                 return;
 
-            decimal result;
+            decimal result = 0.0M, 
+                    middleAction = 0.0M,  
+                    secondAction = 0.0M;
 
             try
             {
-                switch (_currentOperation1)
+                middleAction = doOperation(_currentOperation2, _number2, _number3);
+
+                if (!( _currentOperation1 == 2 || _currentOperation1 == 3 ) &&
+                     ( _currentOperation3 == 2 || _currentOperation3 == 3 ))
                 {
-                    case 0:
-                        result = _number1 + _number2;
-                        result = Math.Round(result, 6);
-                        this.resultBox.Text = result.ToString("#,0.######", _outputFormatInfo);
-                        break;
-                    case 1:
-                        result = _number1 - _number2;
-                        result = Math.Round(result, 6);
-                        this.resultBox.Text = result.ToString("#,0.######", _outputFormatInfo);
-                        break;
-                    case 2:
-                        result = _number1 * _number2;
-                        result = Math.Round(result, 6);
-                        this.resultBox.Text = result.ToString("#,0.######", _outputFormatInfo);
-                        break;
-                    case 3:
-                        result = _number1 / _number2;
-                        result = Math.Round(result, 6);
-                        this.resultBox.Text = result.ToString("#,0.######", _outputFormatInfo);
-                        break;
+                    secondAction = doOperation(_currentOperation3, middleAction, _number4);
+                    result = doOperation(_currentOperation1, _number1, secondAction);
                 }
+                else
+                {
+                    secondAction = doOperation(_currentOperation1, _number1, middleAction);
+                    result = doOperation(_currentOperation3, secondAction, _number4);
+                }
+
+                this.resultBox.Text = result.ToString("#,0.##########", _outputFormatInfo);
             }
             catch (DivideByZeroException)
             {
@@ -168,7 +196,7 @@ namespace Big_calculator
             }
             catch (OverflowException)
             {
-                MessageBox.Show("Result number is out of reachable range!\nImpossible to complete operation!");
+                MessageBox.Show("Middleware calculation result is out of reachable range!\nImpossible to complete operation!");
             }
         }
 
@@ -187,7 +215,7 @@ namespace Big_calculator
         private readonly NumberFormatInfo _outputFormatInfo = new NumberFormatInfo
         {
             NumberGroupSeparator = " ",
-            NumberDecimalDigits = 6,
+            NumberDecimalDigits = 10,
             NumberDecimalSeparator = "."
         };
 
@@ -200,13 +228,13 @@ namespace Big_calculator
         private void operationBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
             this.resultBox.Text = String.Empty;
-            _currentOperation2 = this.operationBox.SelectedIndex;
+            _currentOperation2 = this.operationBox2.SelectedIndex;
         }
 
         private void operationBox3_SelectedIndexChanged(object sender, EventArgs e)
         {
             this.resultBox.Text = String.Empty;
-            _currentOperation3 = this.operationBox.SelectedIndex;
+            _currentOperation3 = this.operationBox3.SelectedIndex;
         }
 
         private void inputNumber3_Enter(object sender, EventArgs e)
@@ -215,20 +243,35 @@ namespace Big_calculator
             this.outOfRangeLabel3.Visible = false;
         }
 
-        private void inputNumber3_Leave(object sender, EventArgs e)
-        {
-
-        }
-
         private void inputNumber4_Enter(object sender, EventArgs e)
         {
             this.wrongFormatLabel4.Visible = false;
             this.outOfRangeLabel4.Visible = false;
         }
 
-        private void inputNumber4_Leave(object sender, EventArgs e)
+        static decimal doOperation(int operation, decimal num1, decimal num2)
         {
+            decimal result = 0.0M;
 
+            switch (operation)
+            {
+                case 0:
+                    result = num1 + num2;             
+                    break;
+                case 1:
+                    result = num1 - num2;
+                    break;
+                case 2:
+                    result = num1 * num2;
+                    break;
+                case 3:
+                    result = num1 / num2;
+                    break;
+            }
+
+            result = Math.Round(result, 10);
+            return result;
         }
+
     }
 }
